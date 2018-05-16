@@ -1,0 +1,1352 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{StackPro\_Accessment\_Solution\_Yan}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{StackPro Coding Test}\label{stackpro-coding-test}
+
+Yan Xu {[}04/15/2018{]} \#\# Data Description A mega-online shopping
+mall provides different baby brands to customers. In order to optimize
+online advertisements throughout websites, they want to predict the
+view-to-click probability given the information below. The data consists
+of: 1. Action: the ``interaction'' that users completed when online ad
+was exposed. There are two types of actions in this dataset, View (a.k.a
+Impression) or Click. (Reference:
+https://en.wikipedia.org/wiki/Impression\_(online\_media)) 2. ID: unique
+user IDs 3. Action Time: the time when action (View/Click) happened, in
+microseconds format 4. Website: the website where the ad was published
+5. Banner Size: the banner size of ad 6. Brand: the brand name that the
+ad was promoting 7. Colour: the colour of product showcased in the ad 8.
+Interaction Time: user's interaction time with each ad (sec)
+
+\subsection{Task}\label{task}
+
+\subsubsection{Goal: Predict the Likelihood of
+Click}\label{goal-predict-the-likelihood-of-click}
+
+\subsubsection{What we would like to see in your Jupyter
+Notebook:}\label{what-we-would-like-to-see-in-your-jupyter-notebook}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  EDA Process (univariate/multivariate analysis, filling missing data
+  etc.)
+\item
+  Feature Selection (select existing features and explanation)
+\item
+  Feature Engineering (create new features and explanation)
+\item
+  Select and Create Model
+\item
+  Hyper parameter Tuning if you feel it's needed
+\item
+  Model Validation process ...
+\end{enumerate}
+
+    \section{Step 1: Data Analysis: Understanding your
+data}\label{step-1-data-analysis-understanding-your-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}265}]:} \PY{c+c1}{\PYZsh{}import modules}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} linear algebra}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{} data processing, CSV file I/O (e.g. pd.read\PYZus{}csv)}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{xgboost} \PY{k+kn}{import} \PY{n}{XGBRegressor}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.ensemble} \PY{k+kn}{import} \PY{n}{RandomForestClassifier} \PY{c+c1}{\PYZsh{} import the random forest model}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import}  \PY{n}{preprocessing} \PY{c+c1}{\PYZsh{} used for label encoding and imputing NaNs}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.feature\PYZus{}selection} \PY{k+kn}{import} \PY{n}{RFECV}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}\PY{p}{,} \PY{n}{RobustScaler}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{make\PYZus{}scorer} 
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.ensemble} \PY{k+kn}{import} \PY{n}{RandomForestRegressor}\PY{p}{,} \PY{n}{GradientBoostingRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.linear\PYZus{}model} \PY{k+kn}{import} \PY{n}{Lasso}\PY{p}{,} \PY{n}{ElasticNet}\PY{p}{,} \PY{n}{Ridge}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.kernel\PYZus{}ridge} \PY{k+kn}{import} \PY{n}{KernelRidge}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{GridSearchCV}\PY{p}{,} \PY{n}{RandomizedSearchCV}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{,} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.feature\PYZus{}selection} \PY{k+kn}{import} \PY{n}{RFECV}
+          \PY{c+c1}{\PYZsh{}from sklearn.preprocessing import StandardScaler, RobustScaler}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{make\PYZus{}scorer} 
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.base} \PY{k+kn}{import} \PY{n}{BaseEstimator}\PY{p}{,} \PY{n}{RegressorMixin}
+          
+          \PY{c+c1}{\PYZsh{} neural networks}
+          \PY{k+kn}{import} \PY{n+nn}{keras}
+          \PY{k+kn}{from} \PY{n+nn}{keras.models} \PY{k+kn}{import} \PY{n}{Sequential}
+          \PY{k+kn}{from} \PY{n+nn}{keras.layers} \PY{k+kn}{import} \PY{n}{Dense}
+          \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k+kn}{import} \PY{n}{regularizers}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.tree} \PY{k+kn}{import} \PY{n}{export\PYZus{}graphviz}
+          \PY{c+c1}{\PYZsh{} import pydotplus}
+          \PY{k+kn}{import} \PY{n+nn}{six}
+\end{Verbatim}
+
+
+    \subsection{Load in dataset}\label{load-in-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}266}]:} \PY{o}{\PYZpc{}}\PY{k}{ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{ansi-magenta-intense}{\textbf{FeatImportance.png}}
+\textcolor{ansi-blue-intense}{\textbf{\_\_MACOSX}}/
+StackPro\_Accessment\_Solution\_Yan.ipynb
+StackPros\_Assessment\_DataScientist\_Senior.csv
+StackPros\_Assessment\_DataScientist\_Senior.pdf
+Untitled.ipynb
+\textcolor{ansi-blue-intense}{\textbf{xgboost}}/
+xgboost\_Click\_Probability.csv
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}267}]:} \PY{n}{raw\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StackPros\PYZus{}Assessment\PYZus{}DataScientist\PYZus{}Senior.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}267}]:}    Unnamed: 0                            ID        ActionTime Action  \textbackslash{}
+          0           1  AMsySZbNg8SBwPtj7IGHnip\_8aY0  1508761859495365   View   
+          1           2  AMsySZZcUFNGOJs-lfC9j-ZDlV7Z  1502847469736117   View   
+          2           3  AMsySZYoK8\_bD0hGv4zu0iRn1TFo  1514169431528120   View   
+          3           4  AMsySZahxpwLOWnMJj6RGATgwEOc  1515527952591896   View   
+          4           5  AMsySZbqgfMBDtAqZz1jVRaOmX00  1507514809374045   View   
+          
+                   Website BannerSize     Brand  colour  InteractionTime  
+          0       Facebook    300x600  Carter's    Pink         0.171601  
+          1       Facebook    300x250  Burberry     Red         4.303945  
+          2       Facebook     728x90    Disney  Yellow         0.868106  
+          3       Facebook     320x50  Carter's  Yellow         0.802647  
+          4  instagram.com    300x250       Gap    Gold         0.627148  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}268}]:} \PY{c+c1}{\PYZsh{}change the a column name \PYZsq{}Unnamed:0\PYZsq{} to \PYZsq{}Index\PYZsq{}}
+          \PY{c+c1}{\PYZsh{}raw\PYZus{}data.rename(columns = \PYZob{}\PYZsq{}Unnamed: 0\PYZsq{}: \PYZsq{}Index\PYZsq{}\PYZcb{},inplace =True)}
+          \PY{c+c1}{\PYZsh{} Drop Unnamed:0 column because it does not contribute to building a model}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}268}]:} ID                  object
+          ActionTime           int64
+          Action              object
+          Website             object
+          BannerSize          object
+          Brand               object
+          colour              object
+          InteractionTime    float64
+          dtype: object
+\end{Verbatim}
+            
+    By looking at the data type of each column, we know that this dataset
+mainly contains catagrical features(2 numerical features and 6
+catagrical features).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}269}]:} \PY{c+c1}{\PYZsh{} the size of the dataset }
+          \PY{k}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the Shape of The Dataset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('the Shape of The Dataset', (1000000, 8))
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}270}]:} \PY{c+c1}{\PYZsh{}chech how many  levels for each catagrical column}
+          \PY{c+c1}{\PYZsh{}print(\PYZsq{}Columns:\PYZsq{},raw\PYZus{}data.columns.tolist())}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique IDs:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{ID}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique Actions:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Action}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique Websites:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Website}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique BannerSizes:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{BannerSize}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique Brands:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Brand}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of unique colours:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{colour}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('Number of unique IDs:', 218686)
+('Number of unique Actions:', 2)
+('Number of unique Websites:', 16)
+('Number of unique BannerSizes:', 15)
+('Number of unique Brands:', 10)
+('Number of unique colours:', 7)
+
+    \end{Verbatim}
+
+    \subsection{The following plots show histograms of catagrical
+features:}\label{the-following-plots-show-histograms-of-catagrical-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}271}]:} \PY{c+c1}{\PYZsh{} As \PYZsq{}Action\PYZsq{} attribute here is the label of our dataset, it is necessary to check if this dataset is balanced?}
+          
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Action}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} One interesting thing is to figure out how many of records has Action attribute equal \PYZsq{}Click\PYZsq{}}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}271}]:} Action
+          Click       244
+          View     999756
+          dtype: int64
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{This figure shows that that the dataset we have is highly
+imbalanced}\label{this-figure-shows-that-that-the-dataset-we-have-is-highly-imbalanced}
+
+The most possible action users taken is View, Just a few of them
+actually click on ads. Therefore, we might need to look into that when
+sampling training set and testing set. We need to keep this in mind when
+performing modelling and evaluation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}272}]:} \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Brand}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}272}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f4c93154c10>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{As for the 'brand' feature, we cannot find somthing that
+we need topay attention
+to}\label{as-for-the-brand-feature-we-cannot-find-somthing-that-we-need-topay-attention-to}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}273}]:} \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{Website}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}273}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f4c1a9c0ad0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{We can find that the majority of the ads were exposed on
+Facebook according to our
+dataset}\label{we-can-find-that-the-majority-of-the-ads-were-exposed-on-facebook-according-to-our-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}274}]:} \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{BannerSize}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}274}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f4c1aa1f3d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Note here, there are two factors{[}other, Other{]}, they
+should represents the same
+meaning}\label{note-here-there-are-two-factorsother-other-they-should-represents-the-same-meaning}
+
+This will be solved later
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}275}]:} \PY{c+c1}{\PYZsh{}fig=plt.figure(figsize=(20,10))}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{colour}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}275}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f4c19324910>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{As for the 'Colour' feature, we cannot find somthing that
+we need topay attention
+to.}\label{as-for-the-colour-feature-we-cannot-find-somthing-that-we-need-topay-attention-to.}
+
+    \subsection{Several Observations}\label{several-observations}
+
+From above results, few things can be found:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The Number of unique IDs is greater than the number of our records,
+  which means one user might view ads more than once. The dataset
+  contains more than two records for a unique user.
+\item
+  At this stage, I discovered a problem, which is the BannerSizes
+  feature, the intuition is that the bigger the banner size, there are
+  higer probabilities that user will click on ads. Intrincally, it
+  should not be catagrical feature, instead, it might be better to
+  convert it to numberical feature, This is where I can do Feature
+  Engineering later on.
+\item
+  The two features, colour and BannerSize contain 'other' catagory, this
+  is not a big problem, Regaring to colour feature, we can regard the
+  ''other catagory as a new catagory. Regaring to BannerSize feature, we
+  will solve this when we perform feature engineering.
+\item
+  After looking at the distribution plots of catagorical features, we
+  can conclude that there are no missing values in catagorical features
+\end{enumerate}
+
+    \section{Feature Engineering}\label{feature-engineering}
+
+As mentioned before, BannerSize feature is a feature we might need to
+introduce a feature-\/-'BannerArea'
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}276}]:} \PY{c+c1}{\PYZsh{} fist we need to deal calculate BannerArea, we will regard \PYZsq{}other\PYZsq{} or \PYZsq{}Other\PYZsq{} factors as missing values in this column}
+          \PY{n}{sizes}\PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{BannerSize}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} As there are just several possible banner sizes, we can calculate the possible area and then infer these values }
+          \PY{c+c1}{\PYZsh{}to new BannerArea feature }
+          \PY{c+c1}{\PYZsh{}define a method to calculate area of banner }
+          \PY{n}{sizes} \PY{o}{=} \PY{n}{sizes}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{new\PYZus{}dir} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{size} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sizes}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{size} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{size} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{new\PYZus{}dir}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=} \PY{l+m+mi}{0}  
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{a}\PY{o}{=} \PY{n}{size}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{area} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb}{int}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{new\PYZus{}dir}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{area}        
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{size} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sizes}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mask} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{BannerSize} \PY{o}{==} \PY{n}{size}
+              \PY{n}{column\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerSize}\PY{l+s+s1}{\PYZsq{}}
+              \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{n}{column\PYZus{}name}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}dir}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+              
+          \PY{c+c1}{\PYZsh{} change the feayture name}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerSize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{inplace} \PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}   
+          
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}276}]:}                              ID        ActionTime Action        Website  \textbackslash{}
+          0  AMsySZbNg8SBwPtj7IGHnip\_8aY0  1508761859495365   View       Facebook   
+          1  AMsySZZcUFNGOJs-lfC9j-ZDlV7Z  1502847469736117   View       Facebook   
+          2  AMsySZYoK8\_bD0hGv4zu0iRn1TFo  1514169431528120   View       Facebook   
+          3  AMsySZahxpwLOWnMJj6RGATgwEOc  1515527952591896   View       Facebook   
+          4  AMsySZbqgfMBDtAqZz1jVRaOmX00  1507514809374045   View  instagram.com   
+          
+            BannerArea     Brand  colour  InteractionTime  
+          0     180000  Carter's    Pink         0.171601  
+          1      75000  Burberry     Red         4.303945  
+          2      65520    Disney  Yellow         0.868106  
+          3      16000  Carter's  Yellow         0.802647  
+          4      75000       Gap    Gold         0.627148  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}277}]:} \PY{c+c1}{\PYZsh{}df[[\PYZsq{}two\PYZsq{}, \PYZsq{}three\PYZsq{}]] = df[[\PYZsq{}two\PYZsq{}, \PYZsq{}three\PYZsq{}]].astype(float)}
+          \PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+          
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}278}]:} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{BannerArea}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}278}]:} array([False,  True], dtype=bool)
+\end{Verbatim}
+            
+    \section{Step 2: Missing value checking and dealing with missing
+values}\label{step-2-missing-value-checking-and-dealing-with-missing-values}
+
+Defined a finction to check of there are missing values in a cenrtain
+feature
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}279}]:} \PY{k}{def} \PY{n+nf}{CheckMissingValues}\PY{p}{(}\PY{n}{feature}\PY{p}{)}\PY{p}{:}
+              \PY{n}{cc} \PY{o}{=}\PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+              \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cc}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{c+c1}{\PYZsh{}if length=1 means return only false,so there are no misssing values}
+                  \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{There are no missing values in feature: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{feature}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alert！ There are missing values in feature:  }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{feature}
+          
+          \PY{n}{column\PYZus{}list} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} check if feature has missing values}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{column\PYZus{}list}\PY{p}{:}
+              \PY{n}{CheckMissingValues}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are no missing values in feature: ID
+There are no missing values in feature: ActionTime
+There are no missing values in feature: Action
+There are no missing values in feature: Website
+Alert！ There are missing values in feature:  BannerArea
+There are no missing values in feature: Brand
+There are no missing values in feature: colour
+Alert！ There are missing values in feature:  InteractionTime
+
+    \end{Verbatim}
+
+    \paragraph{Addressing problems with NaN in the
+data}\label{addressing-problems-with-nan-in-the-data}
+
+As we saw from our EDA there were NaN in feature: InteractionTime. Our
+model won't know what to do with these so we need to replace them with
+something sensible.
+
+There are quite a few options we can use - the mean, median,
+most\_frequent, or a numeric value like 0. Playing with these will give
+different results, for now I have it set to use the mean.
+
+This uses the mean of the column in which the missing value is located.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{c+c1}{\PYZsh{} Create a list of columns that have missing values and an index (True / False)}
+          \PY{n}{df\PYZus{}missing} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}missing}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{column\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{idx\PYZus{}} \PY{o}{=} \PY{n}{df\PYZus{}missing}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}
+          \PY{n}{df\PYZus{}missing} \PY{o}{=} \PY{n}{df\PYZus{}missing}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{idx\PYZus{}}\PY{p}{]}
+          
+          \PY{n}{cols\PYZus{}missing} \PY{o}{=} \PY{n}{df\PYZus{}missing}\PY{o}{.}\PY{n}{column\PYZus{}name}\PY{o}{.}\PY{n}{values}
+          \PY{n}{idx\PYZus{}cols\PYZus{}missing} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{cols\PYZus{}missing}\PY{p}{)}
+          \PY{k}{print} \PY{n}{df\PYZus{}missing} \PY{c+c1}{\PYZsh{} this will count the number of missing values in our dataset}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+       column\_name  missing\_count
+4       BannerArea         162246
+7  InteractionTime              8
+
+    \end{Verbatim}
+
+    As there are only 8 missing values in InteractionTime, Therefore, the
+way of dealing with missing values won't affect prediction results too
+much
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}281}]:} \PY{c+c1}{\PYZsh{} Instantiate an imputer}
+          \PY{n}{imputer} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{Imputer}\PY{p}{(}\PY{n}{missing\PYZus{}values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NaN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{strategy} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Fit the imputer using all of our data (but not any dates)}
+          \PY{n}{imputer}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{idx\PYZus{}cols\PYZus{}missing}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the imputer}
+          \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{idx\PYZus{}cols\PYZus{}missing}\PY{p}{]} \PY{o}{=} \PY{n}{imputer}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{idx\PYZus{}cols\PYZus{}missing}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}282}]:} \PY{c+c1}{\PYZsh{}check again if missing values are filled already?}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{After dealing with missing values}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{CheckMissingValues}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{InteractionTime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{CheckMissingValues}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BannerArea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}let\PYZsq{}s take a look at the histogram of the two numerical data }
+          \PY{c+c1}{\PYZsh{} let\PYZsq{}s take a look at the distrinution of data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+After dealing with missing values
+There are no missing values in feature: InteractionTime
+There are no missing values in feature: BannerArea
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}283}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{c+c1}{\PYZsh{} plot a line, implicitly creating a subplot(111)}
+          
+          
+          \PY{c+c1}{\PYZsh{} now create a subplot which represents the top plot of a grid}
+          \PY{c+c1}{\PYZsh{} with 2 rows and 1 column. Since this subplot will overlap the}
+          \PY{c+c1}{\PYZsh{} first, the plot (and its axes) previously created, will be removed}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{InteractionTime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)} \PY{c+c1}{\PYZsh{} creates 2nd subplot with yellow background}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActionTime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{This figure shows the histograms of ActionTime and
+Interaction
+time}\label{this-figure-shows-the-histograms-of-actiontime-and-interaction-time}
+
+    \subsection{Encoding categorical
+features}\label{encoding-categorical-features}
+
+We will take a naive approach and assign a numeric value to each
+categorical feature in our dataset. Sklearn's preprocessing unit has a
+tool called LabelEncoder() which can do just that for us.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{c+c1}{\PYZsh{} extract the label column:}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{n}{df\PYZus{}fea} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Action}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} encoding categorical features}
+          \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{df\PYZus{}fea}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+              \PY{k}{if} \PY{n}{df\PYZus{}fea}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{lbl} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{lbl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df\PYZus{}fea}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)} 
+                  \PY{n}{df\PYZus{}fea}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{lbl}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df\PYZus{}fea}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}encoding label column: click=1,view =0}
+          \PY{n}{labels} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{Action}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{Click}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{View}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+          
+          \PY{k}{print} \PY{n+nb}{type}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+          \PY{k}{print} \PY{n}{df\PYZus{}fea}\PY{o}{.}\PY{n}{shape}
+          \PY{n}{df\PYZus{}fea}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}split the data into train set and test set}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+(1000000, 7)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}284}]:}        ID        ActionTime  Website  BannerArea  Brand  colour  \textbackslash{}
+          0  185287  1508761859495365        5    180000.0      2       2   
+          1   89056  1502847469736117        5     75000.0      1       3   
+          2   44526  1514169431528120        5     65520.0      3       5   
+          3  148601  1515527952591896        5     16000.0      2       5   
+          4  210803  1507514809374045       15     75000.0      4       1   
+          
+             InteractionTime  
+          0         0.171601  
+          1         4.303945  
+          2         0.868106  
+          3         0.802647  
+          4         0.627148  
+\end{Verbatim}
+            
+    \subsection{Multivariate Analysis}\label{multivariate-analysis}
+
+\paragraph{Use the correlation matrix to check if data has
+multicolinearity}\label{use-the-correlation-matrix-to-check-if-data-has-multicolinearity}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{c+c1}{\PYZsh{}Correlation Matrix}
+          \PY{n}{corr} \PY{o}{=} \PY{n}{df\PYZus{}fea}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{corr} \PY{o}{=} \PY{p}{(}\PY{n}{corr}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr}\PY{p}{,} 
+                      \PY{n}{xticklabels}\PY{o}{=}\PY{n}{corr}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                      \PY{n}{yticklabels}\PY{o}{=}\PY{n}{corr}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heatmap of Correlation Matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{corr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}285}]:}                        ID  ActionTime   Website  BannerArea     Brand  \textbackslash{}
+          ID               1.000000    0.005492 -0.014643   -0.005110  0.000837   
+          ActionTime       0.005492    1.000000 -0.072466   -0.136278  0.000056   
+          Website         -0.014643   -0.072466  1.000000    0.296087 -0.001241   
+          BannerArea      -0.005110   -0.136278  0.296087    1.000000 -0.002021   
+          Brand            0.000837    0.000056 -0.001241   -0.002021  1.000000   
+          colour          -0.000189    0.000037  0.000620    0.000187  0.001227   
+          InteractionTime  0.000294   -0.000396  0.001795   -0.000381  0.000871   
+          
+                             colour  InteractionTime  
+          ID              -0.000189         0.000294  
+          ActionTime       0.000037        -0.000396  
+          Website          0.000620         0.001795  
+          BannerArea       0.000187        -0.000381  
+          Brand            0.001227         0.000871  
+          colour           1.000000        -0.001400  
+          InteractionTime -0.001400         1.000000  
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{This correlation matrix shows there features are not
+correlated to each other, which is good, we might not need to deal with
+correlated
+features}\label{this-correlation-matrix-shows-there-features-are-not-correlated-to-each-other-which-is-good-we-might-not-need-to-deal-with-correlated-features}
+
+    \subsection{Split Dataset into train set and test set by using
+stratified
+sampling}\label{split-dataset-into-train-set-and-test-set-by-using-stratified-sampling}
+
+As the dataset is imbalanced and we want to evaluate the model
+performance on both 'Action' equally, Therefore, dividing the dataset
+into train and test sets using stratified sampling is necessary
+
+Here, 80\% of the data are used for training models and the rest of them
+are used for testing
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}286}]:} \PY{c+c1}{\PYZsh{} split data into train set and test set;}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df\PYZus{}fea}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{stratify}\PY{o}{=}\PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}287}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}287}]:} pandas.core.frame.DataFrame
+\end{Verbatim}
+            
+    \section{Feature Selection}\label{feature-selection}
+
+\subsubsection{At the very begining, we can use a random forest
+classifier to do feature
+selection}\label{at-the-very-begining-we-can-use-a-random-forest-classifier-to-do-feature-selection}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}288}]:} \PY{c+c1}{\PYZsh{} Define a classifier}
+          \PY{n}{rf\PYZus{}clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,}
+                                            \PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Train the model}
+          \PY{n}{rf\PYZus{}clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot the top 40 important features}
+          \PY{n}{imp\PYZus{}feat\PYZus{}rf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{rf\PYZus{}clf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+          \PY{n}{imp\PYZus{}feat\PYZus{}rf}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance with Random Forest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{bottom}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FeatImportance.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lein/miniconda2/lib/python2.7/site-packages/ipykernel\_launcher.py:6: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples,), for example using ravel().
+  
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Observesion of importance of
+features.}\label{observesion-of-importance-of-features.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  we can find that ActionTime, InteractionTime and user ID are the top 3
+  important features among all the features.\\
+\item
+  One interesting finding is website is an insignificant feature
+  accoring to this figure, However, our intuition is the
+  click-through-rate might be related to which wensite the ads were
+  exposed because we need to spend more money on popular webisite like
+  Facebook in order to put on ads.
+\end{enumerate}
+
+At this stage, we cannot conclude that website is a unimportant feature,
+In order to get more confidence, Let us try few more feature selection
+methods
+
+    \subsubsection{Therefore I use XGBoost regressor to generate the rank of
+"feature
+importance"}\label{therefore-i-use-xgboost-regressor-to-generate-the-rank-of-feature-importance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}289}]:} \PY{n}{xgb} \PY{o}{=} \PY{n}{XGBRegressor}\PY{p}{(}\PY{p}{)}
+          \PY{n}{xgb}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{imp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{xgb}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}} \PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{index} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+          \PY{n}{imp} \PY{o}{=} \PY{n}{imp}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{n+nb+bp}{False}\PY{p}{)}
+          
+          \PY{n}{imp}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance with XGBoost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{bottom}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{The feature importance results from XGBoost is a little bit
+different, but the top three most important features are the
+same,}\label{the-feature-importance-results-from-xgboost-is-a-little-bit-different-but-the-top-three-most-important-features-are-the-same}
+
+\subsection{Now we can use RFECV to eliminate the redundant
+features(i.e. Select
+features).}\label{now-we-can-use-rfecv-to-eliminate-the-redundant-featuresi.e.-select-features.}
+
+The following are what I did originally to select features. I ran a loop
+and use XGBoost regressor with cross validation to see the improvement
+of Root-Mean-Squared-Error as a function of the number of features
+included. This method is essentially the RFECV algorithm).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}290}]:} \PY{c+c1}{\PYZsh{} Define a function to calculate RMSE}
+          \PY{k}{def} \PY{n+nf}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Define a function to calculate negative RMSE (as a score)}
+          \PY{k}{def} \PY{n+nf}{nrmse}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+          
+          \PY{n}{neg\PYZus{}rmse} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{nrmse}\PY{p}{)}
+          
+          \PY{n}{estimator} \PY{o}{=} \PY{n}{XGBRegressor}\PY{p}{(}\PY{p}{)}
+          \PY{n}{selector} \PY{o}{=} \PY{n}{RFECV}\PY{p}{(}\PY{n}{estimator}\PY{p}{,} \PY{n}{cv} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{n\PYZus{}jobs} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{n}{neg\PYZus{}rmse}\PY{p}{)}
+          \PY{n}{selector} \PY{o}{=} \PY{n}{selector}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of selected features is: \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{selector}\PY{o}{.}\PY{n}{n\PYZus{}features\PYZus{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{features\PYZus{}kept} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{n}{selector}\PY{o}{.}\PY{n}{support\PYZus{}}\PY{p}{]} 
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the selected features are the followings}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{features\PYZus{}kept}
+          
+          \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{selector}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}  
+          \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{selector}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{k}{print} \PY{n+nb}{type}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of selected features is: 7
+the selected features are the followings
+['ID' 'ActionTime' 'Website' 'BannerArea' 'Brand' 'colour'
+ 'InteractionTime']
+<type 'numpy.ndarray'>
+
+    \end{Verbatim}
+
+    \subsubsection{At this stage, the feature selection part is
+done}\label{at-this-stage-the-feature-selection-part-is-done}
+
+\section{Model Selection and Model
+Evaluation}\label{model-selection-and-model-evaluation}
+
+\subsection{-\/-Cross-validation with stratification based on class
+labels.}\label{cross-validation-with-stratification-based-on-class-labels.}
+
+One thing we need to clarify is that our goal is to estimate the
+probability of click on ads. This a regression problem instead of
+classifiction problem: 1. As our dataset almost consists of catagrical
+features, and we know that tree-based method perform well on categrical
+data
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  we need to adopt cross-validation with stratification becasue of our
+  imbalanced dataset
+\item
+  Therefore, I decided to implement three-basned regression models
+  first(we can choose more than three models if we want, but three
+  models are enough for now to show an example of model selection using
+  cross-validation. beside, becasue of my computer's memory restriction,
+  I am unable to perform cross-validation for more models)
+\item
+  After evaluate their performance with the averaged L2 loss through
+  cross-validation, we can pick the one has lowest loss as our final
+  model.
+\item
+  After performing the above, we will do hyperparameter tuning to
+  achieve a lower loss.(better model)
+\end{enumerate}
+
+Let us try a decision tree first.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}291}]:} \PY{c+c1}{\PYZsh{} before get started, we need to split data into subsets. }
+          \PY{c+c1}{\PYZsh{}hus, let us combine X\PYZus{}train, X\PYZus{}test, y\PYZus{}train and y\PYZus{}test together }
+          
+          \PY{n}{X}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn.model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{StratifiedKFold}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.ensemble} \PY{k+kn}{import} \PY{n}{GradientBoostingRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{tree}
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{} Start with stratified 10 folde cross\PYZhy{}validation for }
+          \PY{n}{skf} \PY{o}{=} \PY{n}{StratifiedKFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{tree\PYZus{}mse\PYZus{}list} \PY{o}{=}\PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{skf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+              \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{clf} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+              \PY{n}{tree\PYZus{}mse\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{c+c1}{\PYZsh{}let\PYZsq{}s try a more advanced boosting model GradientBoostingRegressor}
+          
+          \PY{n}{GBR\PYZus{}mse\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{skf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+              \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{est} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} 
+              \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{pred} \PY{o}{=} \PY{n}{est}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+              \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{est}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+              \PY{n}{GBR\PYZus{}mse\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse}\PY{p}{)}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{c+c1}{\PYZsh{} XGBoost with 10\PYZhy{}fold\PYZhy{} stratified cross validation}
+          \PY{n}{XGB\PYZus{}mse\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{skf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+              \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{xgb} \PY{o}{=} \PY{n}{XGBRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{subsample}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{colsample\PYZus{}bytree}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} 
+                             \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{reg\PYZus{}alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{reg\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{min\PYZus{}child\PYZus{}weight}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{pred} \PY{o}{=} \PY{n}{xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+              \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+              \PY{n}{XGB\PYZus{}mse\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mse}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Summary of three regression
+models}\label{summary-of-three-regression-models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Cross\PYZus{}validation LOSS of decision tree regressor is}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{tree\PYZus{}mse\PYZus{}list}\PY{p}{)}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Cross\PYZus{}validation LOSS of GradientBoosting Regressor is}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{GBR\PYZus{}mse\PYZus{}list}\PY{p}{)}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Cross\PYZus{}validation LOSS of XGBRegressor is}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{XGB\PYZus{}mse\PYZus{}list}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Cross\_validation LOSS of decision tree regressor is
+0.000457000270037
+The Cross\_validation LOSS of GradientBoosting Regressor is
+0.000243897601461
+The Cross\_validation LOSS of XGBRegressor is
+0.000243081547549
+
+    \end{Verbatim}
+
+    \subsubsection{As the loss of XGBRegressor is the lowest according to
+cross-validation results. Therefore, we will choose XGBRegressor among
+the three
+models}\label{as-the-loss-of-xgbregressor-is-the-lowest-according-to-cross-validation-results.-therefore-we-will-choose-xgbregressor-among-the-three-models}
+
+    \section{Step 4: Hyperparameter
+tuning}\label{step-4-hyperparameter-tuning}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The hyperparameters of these regressors were tuned using GridSearchCV.
+\item
+  Again, becasue of my computer computational ability is not good, it is
+  very slow to run GridSearchCV over many different options of
+  parameters. Therefore, I did not try different parameters a lot, but
+  we can get the idea of hyperparameter tuning
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}181}]:} \PY{n}{params}\PY{o}{=}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{c+c1}{\PYZsh{} 5 is good but takes too long in kaggle env}
+              \PY{c+c1}{\PYZsh{}\PYZsq{}subsample\PYZsq{}: [0.3,0.5],}
+              \PY{c+c1}{\PYZsh{}\PYZsq{}colsample\PYZus{}bytree\PYZsq{}: [0.5,0.8],}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}estimators}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}
+              \PY{c+c1}{\PYZsh{}\PYZsq{}reg\PYZus{}alpha\PYZsq{}: [0.01, 0]}
+          \PY{p}{\PYZcb{}}
+          \PY{n}{xgb\PYZus{}clf} \PY{o}{=} \PY{n}{XGBRegressor}\PY{p}{(}\PY{p}{)}
+          \PY{n}{rs} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{xgb\PYZus{}clf}\PY{p}{,}
+                            \PY{n}{params}\PY{p}{,}
+                            \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}
+                            \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{neg\PYZus{}mean\PYZus{}squared\PYZus{}error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                            \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                            \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{rs}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{best\PYZus{}est} \PY{o}{=} \PY{n}{rs}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+          \PY{k}{print}\PY{p}{(}\PY{n}{best\PYZus{}est}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 5 folds for each of 4 candidates, totalling 20 fits
+[CV] n\_estimators=500, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=3, total= 1.7min
+[CV] n\_estimators=500, max\_depth=3 {\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=1)]: Done   1 out of   1 | elapsed:  1.8min remaining:    0.0s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[CV] {\ldots} n\_estimators=500, max\_depth=3, total= 1.7min
+[CV] n\_estimators=500, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=3, total= 1.7min
+[CV] n\_estimators=500, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=3, total= 1.6min
+[CV] n\_estimators=500, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=3, total= 1.6min
+[CV] n\_estimators=100, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=3, total=  19.3s
+[CV] n\_estimators=100, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=3, total=  19.2s
+[CV] n\_estimators=100, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=3, total=  19.3s
+[CV] n\_estimators=100, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=3, total=  19.4s
+[CV] n\_estimators=100, max\_depth=3 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=3, total=  20.3s
+[CV] n\_estimators=500, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=5, total= 2.9min
+[CV] n\_estimators=500, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=5, total= 2.8min
+[CV] n\_estimators=500, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=5, total= 2.8min
+[CV] n\_estimators=500, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=5, total= 3.0min
+[CV] n\_estimators=500, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=500, max\_depth=5, total= 2.8min
+[CV] n\_estimators=100, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=5, total=  32.2s
+[CV] n\_estimators=100, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=5, total=  32.0s
+[CV] n\_estimators=100, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=5, total=  31.2s
+[CV] n\_estimators=100, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=5, total=  30.9s
+[CV] n\_estimators=100, max\_depth=5 {\ldots}
+[CV] {\ldots} n\_estimators=100, max\_depth=5, total=  30.9s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=1)]: Done  20 out of  20 | elapsed: 28.4min finished
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+XGBRegressor(base\_score=0.5, booster='gbtree', colsample\_bylevel=1,
+       colsample\_bytree=1, gamma=0, learning\_rate=0.1, max\_delta\_step=0,
+       max\_depth=3, min\_child\_weight=1, missing=None, n\_estimators=100,
+       n\_jobs=1, nthread=None, objective='reg:linear', random\_state=0,
+       reg\_alpha=0, reg\_lambda=1, scale\_pos\_weight=1, seed=None,
+       silent=True, subsample=1)
+
+    \end{Verbatim}
+
+    \subsubsection{After finding the best parameters, Now we can use these
+parameter in the XGBoosting regression
+model}\label{after-finding-the-best-parameters-now-we-can-use-these-parameter-in-the-xgboosting-regression-model}
+
+next, we will use this model to make the final prediction on test set
+and computet the losses for each records in the test set and save these
+prediction into a csv file
+
+\subsubsection{Finally, as we already have the labels for the test set,
+we can compute the L2
+loss}\label{finally-as-we-already-have-the-labels-for-the-test-set-we-can-compute-the-l2-loss}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{c+c1}{\PYZsh{} change several paramters as the best options and the we will use this as the final model}
+          
+          \PY{n}{xgb} \PY{o}{=} \PY{n}{XGBRegressor}\PY{p}{(}\PY{n}{base\PYZus{}score}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{booster}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gbtree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{colsample\PYZus{}bylevel}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{n}{colsample\PYZus{}bytree}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{max\PYZus{}delta\PYZus{}step}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{min\PYZus{}child\PYZus{}weight}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{missing}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}
+                 \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nthread}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{objective}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reg:linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{reg\PYZus{}alpha}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{reg\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{scale\PYZus{}pos\PYZus{}weight}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,}
+                 \PY{n}{silent}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{subsample}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{When we have some data need to predict the probabiity of click,
+we can use this
+mode}\label{when-we-have-some-data-need-to-predict-the-probabiity-of-click-we-can-use-this-mode}
+
+\paragraph{Note that the following code is for the new data that need to
+perform prediction; the following code won't
+work}\label{note-that-the-following-code-is-for-the-new-data-that-need-to-perform-prediction-the-following-code-wont-work}
+
+\paragraph{The new data need to go through the data preproceiing steps,
+then we can use this model to predict the probability of
+click}\label{the-new-data-need-to-go-through-the-data-preproceiing-steps-then-we-can-use-this-model-to-predict-the-probability-of-click}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{X\PYZus{}pred} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./ ....}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pred} \PY{o}{=} \PY{n}{xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}pred}\PY{p}{)}
+        \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{xgb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}233}]:} \PY{n}{cilck\PYZus{}probs} \PY{o}{=} \PY{n}{pred}
+          
+          \PY{c+c1}{\PYZsh{}generate the dataFrame we want to save.}
+          \PY{n}{pred}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{pred}\PY{p}{,} \PY{p}{(}\PY{n}{pred}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} 
+          \PY{n}{test\PYZus{}arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{pred}\PY{p}{)}\PY{p}{)}
+          \PY{n}{col} \PY{o}{=}\PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{colu} \PY{o}{=}\PY{n}{col}\PY{o}{+}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Prob\PYZus{}Click}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df\PYZus{}re}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{test\PYZus{}arr}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{n}{colu}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}\PYZsh{} Save the prediction results to a .csv file as dataframe}
+          \PY{n}{save\PYZus{}results} \PY{o}{=} \PY{n}{df\PYZus{}re}
+          \PY{n}{save\PYZus{}results}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xgboost\PYZus{}Click\PYZus{}Probability.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Summary}\label{summary}
+
+\subsection{In order to predict the view-to-click probability of online
+ads, the following steps are
+taken:}\label{in-order-to-predict-the-view-to-click-probability-of-online-ads-the-following-steps-are-taken}
+
+\subsubsection{1. Data analysis and data
+wrangling}\label{data-analysis-and-data-wrangling}
+
+\subsubsection{2. Feature Selection and Feature
+Engineering}\label{feature-selection-and-feature-engineering}
+
+\subsubsection{3. Model Selection and Model
+building}\label{model-selection-and-model-building}
+
+\subsubsection{4. Model Evaluation and Hyperparameter
+Tuning}\label{model-evaluation-and-hyperparameter-tuning}
+
+    Thanks for giving me this opportunity, any feedback will be appreciate.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
